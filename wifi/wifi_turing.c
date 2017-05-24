@@ -230,6 +230,7 @@ int is_wifi_driver_loaded() {
 int wifi_load_driver()
 {
 #ifdef WIFI_DRIVER_MODULE_PATH
+	
     char driver_status[PROPERTY_VALUE_MAX];
     int count = 100; /* wait at most 20 seconds for completion */
 
@@ -270,8 +271,11 @@ int wifi_load_driver()
 
 int wifi_unload_driver()
 {
-    usleep(200000); /* allow to finish interface down */
+    usleep(400000); /* allow to finish interface down */
 #ifdef WIFI_DRIVER_MODULE_PATH
+
+	return 0;
+
     if (rmmod(DRIVER_MODULE_NAME) == 0) {
         int count = 20; /* wait at most 10 seconds for completion */
         while (count-- > 0) {
